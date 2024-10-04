@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.0",
+    "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4"
+  },
+  "name": "setupexpress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Shuvo",
+  "license": "ISC",
+  "description": ""
+}
