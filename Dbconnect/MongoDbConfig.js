@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const mongoDbinstense = mongoose.connect(ConnectionURL);
-    console.log(mongoDbinstense);
   } catch (error) {
     console.log(error, "Error from connect db");
   }
