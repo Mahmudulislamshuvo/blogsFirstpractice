@@ -53,16 +53,14 @@ app.post("/createBlog", async (req, res) => {
       tittle: tittle,
       description: description,
       authorName: authorName,
-    }).save();
-    return (
-      res.status(200),
-      json({
-        success: true,
-        data: MongoDbSaved,
-        message: "data uploaded",
-        error: false,
-      })
-    );
+    });
+    const savedData = MongoDbSaved.save();
+    return res.status(200).json({
+      success: true,
+      data: MongoDbSaved,
+      message: "data uploaded",
+      error: false,
+    });
   } catch (error) {
     console.log(error, "error from creating controller");
   }
