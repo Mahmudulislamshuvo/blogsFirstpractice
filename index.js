@@ -49,11 +49,13 @@ app.post("/createBlog", async (req, res) => {
         error: true,
       });
     }
+    // creating new blog
     const MongoDbSaved = await new BlogModel({
       tittle: tittle,
       description: description,
       authorName: authorName,
     });
+    // new data saving
     const savedData = MongoDbSaved.save();
     return res.status(200).json({
       success: true,
