@@ -8,6 +8,7 @@ const BlogModel = require("./Model/Blog.Model");
 const { json } = require("express/lib/response");
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.post("/createBlog", async (req, res) => {
   try {
@@ -65,6 +66,57 @@ app.post("/createBlog", async (req, res) => {
     });
   } catch (error) {
     console.log(error, "error from creating controller");
+  }
+});
+
+app.get("/getalldata", async (req, res) => {
+  try {
+    const allblog = await BlogModel.find({});
+    if (allblog) {
+      res.status(200).json({
+        error: false,
+        data: allblog,
+        message: "retrive all blog successful",
+      });
+    }
+  } catch (error) {
+    console.log("error from data retrive", error);
+  }
+});
+
+app.patch("/update/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { tittle, description, authorName } = req.body;
+    const updateblog = await BlogModel.findOneAndUpdate(
+      { _id: id },
+      {
+        ...(tittle && { tittle: tittle }),
+        ...(description && { description: description }),
+        ...(authorName && { authorName: authorName }),
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(updateblog);
+  } catch (error) {
+    console.log("error from data update", error);
+    res.status(455).json({ error: "Data update failed" });
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteItem = await BlogModel.findOneAndDelete({ _id: id });
+    res.status(200).json({
+      success: true,
+      data: deleteItem,
+      message: "item Deleted",
+    });
+  } catch (error) {
+    console.log("from delete error", error);
   }
 });
 
