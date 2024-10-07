@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const { connectDB } = require("./Dbconnect/MongoDbConfig");
+const cors = require("cors");
 
 connectDB();
 
 const BlogModel = require("./Model/Blog.Model");
 const { json } = require("express/lib/response");
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
